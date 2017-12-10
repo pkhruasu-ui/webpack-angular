@@ -4,7 +4,8 @@ const { ContextReplacementPlugin } = require('webpack');
 
 module.exports = {
     entry: {
-        main: './src/main.ts'
+        main: './src/main.ts',
+        'polyfills': './src/polyfills.ts'
     },
     output: {
         path: path.join(__dirname, "./dist/"),
@@ -14,7 +15,7 @@ module.exports = {
         extensions: ['.js', '.ts', '.html']
     },
     devServer: {
-        contentBase: path.join(__dirname, "../dist/"),
+        contentBase: path.join(__dirname, "./dist/"),
         port: 9000
     },
     devtool: 'inline-source-map',
