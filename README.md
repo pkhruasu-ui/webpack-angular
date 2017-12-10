@@ -1,6 +1,5 @@
 Webpack-Angular 5 basic
  Very minimal setup to make webpack work with Angular 5 and AOT
- - No css
  - No other js
  - No lazyload module
 
