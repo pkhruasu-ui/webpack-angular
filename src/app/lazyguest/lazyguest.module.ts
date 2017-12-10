@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { LazyGuestComponent } from './lazyguest.component';
 
 const lazyGuestRoutes: Routes = [
 {
-  path: 'lazyguest', component: LazyGuestComponent 
+  path: '', component: LazyGuestComponent 
 }];
 
 @NgModule({
@@ -16,9 +16,7 @@ const lazyGuestRoutes: Routes = [
 		LazyGuestComponent
 	],
 	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpModule,
+		CommonModule,		
 		RouterModule.forChild(lazyGuestRoutes)
 	],
 	exports: [

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { HomeComponent } from './home.component';
 
 const appRoutes: Routes = [
 {
-  path: 'home', component: HomeComponent 
+  path: '', component: HomeComponent 
 }];
 
 @NgModule({
@@ -16,9 +16,7 @@ const appRoutes: Routes = [
 		HomeComponent
 	],
 	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpModule,
+		CommonModule,
 		RouterModule.forChild(appRoutes)
 	],
 	exports: [

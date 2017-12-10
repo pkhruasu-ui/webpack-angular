@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ContextReplacementPlugin } = require('webpack');
 
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
     entry: {
         main: './src/main.ts',
@@ -10,6 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, "./dist/"),
         filename: "[name].bundle.js",
+        chunkFilename: "[name].chunk.js"    // lazyload chunk will use file name instead of id
     },
     resolve: {
         extensions: ['.js', '.ts', '.html']
@@ -21,7 +24,10 @@ module.exports = {
     devtool: 'inline-source-map',
     module: {
         loaders: [
-            { test: /.ts$/, use: ['awesome-typescript-loader', 'angular2-template-loader'] },
+            { test: /.ts$/, use: [
+                    'awesome-typescript-loader',    // 3 parse therest of ts
+                    'angular2-template-loader',     // 2 parse template html
+                    'angular-router-loader'] },     // 1 parse any lazyload children
             { test: /.html$/, use: 'raw-loader' },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
             { test: /\.scss$/, use: [ {
@@ -43,7 +49,9 @@ module.exports = {
             path: path.join(__dirname, "./dist/"),
             hash: true
         }),
-        new ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './client'))
+        new ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './client')),
+
+        // new BundleAnalyzerPlugin()
     ]
     
 }

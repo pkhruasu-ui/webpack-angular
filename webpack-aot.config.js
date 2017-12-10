@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ContextReplacementPlugin } = require('webpack');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -11,6 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, "./dist/"),
         filename: "[name].bundle.js",
+        chunkFilename: "[name].chunk.js"
     },
     resolve: {
         extensions: ['.js', '.ts', '.html']
@@ -24,8 +26,10 @@ module.exports = {
         loaders: [
             { 
                 test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-                loader: '@ngtools/webpack'
-            },
+                use: [
+                '@ngtools/webpack',                 // 2 Let cli do w/e they do
+                'angular-router-loader?aot=true']   // 1 parse any lazyload children
+            },            
             { test: /.html$/, use: 'raw-loader' },
             { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
             { test: /\.scss$/, use: [ {
@@ -53,6 +57,8 @@ module.exports = {
             hash: true
         }),
         new ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './client'))
+
+        // , new BundleAnalyzerPlugin()
     ]
     
 }

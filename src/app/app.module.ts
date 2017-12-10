@@ -14,10 +14,13 @@ import '../style/other.css';
 
 const appRoutes: Routes = [ 
   {
-     path: '',
-     redirectTo: '/home',
-     pathMatch: 'full'
-  } 
+    path: 'home',
+    loadChildren: './home/home.module#HomeModule'
+  },
+  {
+    path: "lazy",
+    loadChildren: './lazyguest/lazyguest.module#LazyGuestModule'
+  }  
 ]
 
 @NgModule({
@@ -28,8 +31,6 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    HomeModule,
-    LazyGuestModule,
     RouterModule.forRoot(appRoutes) // <-- debugging purposes only
   ],
   providers: [],
