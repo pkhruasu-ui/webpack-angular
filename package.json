@@ -8,7 +8,8 @@
     "serve": "rimraf ./dist && webpack-dev-server --config webpack.config.js",
     "serve:aot": "rimraf ./dist && webpack-dev-server --config webpack-aot.config.js",
     "build": "rimraf ./dist && webpack --config webpack.config.js",
-    "build:aot": "rimraf ./dist && webpack --config webpack-aot.config.js"
+    "build:aot": "rimraf ./dist && webpack --config webpack-aot.config.js",
+    "lite": "lite-server lite-server --baseDir='dist'"
   },
   "author": "",
   "license": "ISC",

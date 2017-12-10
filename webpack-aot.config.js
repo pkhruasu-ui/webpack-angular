@@ -26,7 +26,16 @@ module.exports = {
                 test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
                 loader: '@ngtools/webpack'
             },
-            { test: /.html$/, use: 'raw-loader' }
+            { test: /.html$/, use: 'raw-loader' },
+            { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+            { test: /\.scss$/, use: [ {
+	                loader: "style-loader" // 3 creates style nodes from JS strings
+	            }, {
+	                loader: "css-loader" // 2 translates CSS into CommonJS
+	            }, {
+	                loader: "sass-loader" // 1 compiles Sass to CSS
+	            } ] 
+	        }
         ]
     },
     plugins: [
